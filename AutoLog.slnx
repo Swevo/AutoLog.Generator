@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/AutoLog/AutoLog.csproj" />
+  <Project Path="tests/AutoLog.Tests/AutoLog.Tests.csproj" />
+</Solution>
