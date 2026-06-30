@@ -14,7 +14,7 @@
     <Authors>Justin Bannister</Authors>
     <Copyright>Copyright (c) 2026 Justin Bannister</Copyright>
     <Description>Compile-time high-performance logging for .NET using Roslyn source generators. Add [Log(LogLevel.Information, &quot;Message {Param}&quot;)] to a partial method — AutoLog generates LoggerMessage.Define calls at build time. Zero reflection, zero overhead, AOT-safe.</Description>
-    <PackageTags>logging;loggermessage;source-generator;roslyn;dotnet;aspnetcore;csharp;compile-time;zero-reflection;aot;high-performance-logging;structured-logging;ilogger</PackageTags>
+    <PackageTags>logging;loggermessage;source-generator;roslyn;dotnet;aspnetcore;csharp;compile-time;zero-reflection;aot;high-performance-logging;structured-logging;ilogger;iloggert;log;logger;performance;logging-framework;loggermessagedefine</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Swevo/AutoLog.Generator</RepositoryUrl>
