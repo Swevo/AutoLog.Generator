@@ -157,17 +157,68 @@ partial void LogProcessingFailed(int orderId, Exception ex)
 | AL002 | Error | `[Log]` on `{Method}` — containing class `{Class}` has no `ILogger` or `ILogger<T>` field or property. Add one to enable log generation. |
 | AL003 | Warning | `[Log]` on `{Method}` has `{N}` type parameters — `LoggerMessage.Define` supports a maximum of 6. |
 
+## Migrating from `[LoggerMessage]`
+
+Microsoft's source-generated `[LoggerMessage]` and AutoLog produce the same `LoggerMessage.Define` output. The difference is ergonomics.
+
+### Before (`[LoggerMessage]`)
+
+```csharp
+public static partial class OrderLogs
+{
+    [LoggerMessage(EventId = 1001, Level = LogLevel.Information,
+        Message = "Processing order {OrderId} for customer {CustomerId}")]
+    public static partial void ProcessingOrder(ILogger logger, int orderId, string customerId);
+
+    [LoggerMessage(EventId = 1002, Level = LogLevel.Warning,
+        Message = "Order {OrderId} not found")]
+    public static partial void OrderNotFound(ILogger logger, int orderId);
+}
+
+// Call site — must pass logger explicitly every time:
+OrderLogs.ProcessingOrder(_logger, order.Id, order.CustomerId);
+```
+
+### After (`AutoLog`)
+
+```csharp
+public partial class OrderService
+{
+    private readonly ILogger<OrderService> _logger;
+
+    [Log(LogLevel.Information, "Processing order {OrderId} for customer {CustomerId}")]
+    partial void LogProcessingOrder(int orderId, string customerId);
+
+    [Log(LogLevel.Warning, "Order {OrderId} not found")]
+    partial void LogOrderNotFound(int orderId);
+}
+
+// Call site — logger is implicit:
+LogProcessingOrder(order.Id, order.CustomerId);
+```
+
+### Migration steps
+
+1. **Install** `AutoLog.Generator` — `dotnet add package AutoLog.Generator`
+2. **Make your service class `partial`**
+3. **Replace `static partial` log methods** with `partial void` instance methods and `[Log]`
+4. **Remove the explicit `ILogger` parameter** — AutoLog detects it from the field
+5. **Remove manual `EventId`s** — auto-assigned sequentially per class
+6. **Update call sites** — drop `ClassName.` prefix and the logger argument
+
 ## Also by the same author
 
 > 🌐 Full suite overview: **[swevo.github.io](https://swevo.github.io/)**
 
 | Package | Description |
 |---|---|
-| [**AutoWire**](https://github.com/Swevo/AutoWire) | Compile-time DI auto-registration for `Microsoft.Extensions.DependencyInjection`. |
-| [**AutoMap.Generator**](https://github.com/Swevo/AutoMap.Generator) | Compile-time object mapping with generated extension methods. |
-| [**AutoValidate.Generator**](https://github.com/Swevo/AutoValidate.Generator) | Compile-time validator discovery and registration. |
-| [**AutoResult.Generator**](https://github.com/Swevo/AutoResult.Generator) | Compile-time result helpers and `Try*()` wrappers. |
-| [**AutoQuery.Generator**](https://github.com/Swevo/AutoQuery.Generator) | Compile-time query specifications for LINQ-based filtering. |
+| [**AutoHttpClient.Generator**](https://github.com/Swevo/AutoHttpClient.Generator) | Compile-time typed HTTP client — `[HttpClient]` on an interface generates a strongly-typed client. AOT-safe Refit alternative. |
+| [**AutoDispatch.Generator**](https://github.com/Swevo/AutoDispatch.Generator) | Compile-time CQRS dispatcher — `[Handler]` generates a strongly-typed `IDispatcher`. No MediatR, no reflection. |
+| [**AutoWire**](https://github.com/Swevo/AutoWire) | Compile-time DI auto-registration — `[Scoped]`/`[Singleton]`/`[Transient]` generates `IServiceCollection` registration code. |
+| [**AutoMap.Generator**](https://github.com/Swevo/AutoMap.Generator) | Compile-time object mapping with generated extension methods. AOT-safe AutoMapper alternative. |
+| [**AutoValidate.Generator**](https://github.com/Swevo/AutoValidate.Generator) | Compile-time FluentValidation wiring — discovers validators and generates `AddValidators()`. |
+| [**AutoResult.Generator**](https://github.com/Swevo/AutoResult.Generator) | Compile-time `Result<T>` — `[TryWrap]` generates `Try*()` wrappers for every public method. |
+| [**AutoQuery.Generator**](https://github.com/Swevo/AutoQuery.Generator) | Compile-time LINQ query specs — `[QuerySpec]` generates a strongly-typed `Apply(IQueryable<T>)`. |
 
 ## License
 
