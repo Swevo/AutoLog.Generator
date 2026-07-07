@@ -38,11 +38,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="....icon.png" Pack="true" PackagePath="" />
-    <None Include="....README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="buildAutoLog.props" Pack="true" PackagePath="build" />
-    <None Include="buildAutoLog.Generator.props" Pack="true" PackagePath="build" />
-    <None Include="buildAutoLog.Generator.targets" Pack="true" PackagePath="build" />
+    <None Include="build\AutoLog.props" Pack="true" PackagePath="build\" />
+    <None Include="build\AutoLog.Generator.props" Pack="true" PackagePath="build\" />
+    <None Include="build\AutoLog.Generator.targets" Pack="true" PackagePath="build\" />
   </ItemGroup>
 </Project>
