@@ -10,7 +10,7 @@
     <NoWarn>$(NoWarn);NU5017;NU5128;RS2008</NoWarn>
 
     <PackageId>AutoLog.Generator</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Justin Bannister</Authors>
     <Copyright>Copyright (c) 2026 Justin Bannister</Copyright>
     <Description>Compile-time high-performance logging for .NET using Roslyn source generators. Add [Log(LogLevel.Information, &quot;Message {Param}&quot;)] to a partial method — AutoLog generates LoggerMessage.Define calls at build time. Zero reflection, zero overhead, AOT-safe.</Description>
@@ -26,7 +26,7 @@
     <IncludeSymbols>false</IncludeSymbols>
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
-    <PackageReleaseNotes>1.0.0: [Log(Level, Message)] on partial void methods; LoggerMessage.Define generation; ILogger field auto-detection; EventId auto-assignment; AL001/AL002/AL003 diagnostics.</PackageReleaseNotes>
+    <PackageReleaseNotes>1.0.1: Fix package icon (was showing an incorrect/placeholder image). 1.0.0: [Log(Level, Message)] on partial void methods; LoggerMessage.Define generation; ILogger field auto-detection; EventId auto-assignment; AL001/AL002/AL003 diagnostics.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.*" PrivateAssets="all" />
@@ -38,11 +38,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="....icon.png" Pack="true" PackagePath="" />
+    <None Include="....README.md" Pack="true" PackagePath="" />
     <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="build\AutoLog.props" Pack="true" PackagePath="build\" />
-    <None Include="build\AutoLog.Generator.props" Pack="true" PackagePath="build\" />
-    <None Include="build\AutoLog.Generator.targets" Pack="true" PackagePath="build\" />
+    <None Include="buildAutoLog.props" Pack="true" PackagePath="build" />
+    <None Include="buildAutoLog.Generator.props" Pack="true" PackagePath="build" />
+    <None Include="buildAutoLog.Generator.targets" Pack="true" PackagePath="build" />
   </ItemGroup>
 </Project>
