@@ -3,6 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/v/AutoLog.Generator.svg)](https://www.nuget.org/packages/AutoLog.Generator)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/AutoLog.Generator.svg)](https://www.nuget.org/packages/AutoLog.Generator)
 [![CI](https://github.com/Swevo/AutoLog.Generator/actions/workflows/build.yml/badge.svg)](https://github.com/Swevo/AutoLog.Generator/actions/workflows/build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 AutoLog turns simple `[Log]`-annotated partial methods into **high-performance `LoggerMessage.Define` logging** at build time. You keep normal `ILogger` fields and readable structured log messages; the generator emits cached delegates, `EventId`s, and partial method bodies for you.
 
